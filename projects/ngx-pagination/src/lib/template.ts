@@ -8,6 +8,7 @@ export const DEFAULT_TEMPLATE = `
                          [id]="id"
                          [maxSize]="maxSize"
                          (pageChange)="pageChange.emit($event)"
+                         (perPageChange)="perPageChange.emit($event)"
                          (pageBoundsCorrection)="pageBoundsCorrection.emit($event)">
     <nav role="navigation" [attr.aria-label]="screenReaderPaginationLabel">
     <ul class="ngx-pagination" 
@@ -49,6 +50,11 @@ export const DEFAULT_TEMPLATE = `
             <span *ngIf="p.isLastPage()" aria-disabled="true">
                  {{ nextLabel }} <span class="show-for-sr">{{ screenReaderPageLabel }}</span>
             </span>
+        </li>
+        <li>
+        <span class="perPageStyler">Show</span> <select class="perPageStyler" (change)="p.perPageChangeEmit($event)">
+        <option [value]=page *ngFor="let page of p.perPage; trackBy: trackByIndex">{{page}}</option>
+        </select> <span class="perPageStyler">/ page</span>
         </li>
 
     </ul>
@@ -116,6 +122,16 @@ export const DEFAULT_STYLES = `
   clip: rect(0, 0, 0, 0); }
 .ngx-pagination .small-screen {
   display: none; }
+span.perPageStyler{
+  font-weight: 400;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  font-size: 1.1rem;
+}
+select.perPageStyler{
+  font-weight: 600;
+    padding: .2rem;
+}
 @media screen and (max-width: 601px) {
   .ngx-pagination.responsive .small-screen {
     display: inline-block; } 

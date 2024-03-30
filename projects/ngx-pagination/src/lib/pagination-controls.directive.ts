@@ -22,9 +22,10 @@ export class PaginationControlsDirective {
     @Input() id: string;
     @Input() maxSize: number = 7;
     @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+    @Output() perPageChange: EventEmitter<number> = new EventEmitter<number>();
     @Output() pageBoundsCorrection: EventEmitter<number> = new EventEmitter<number>();
     pages: Page[] = [];
-
+    perPage:number[]=[];
     private changeSub: Subscription;
 
     constructor(private service: PaginationService,
@@ -43,6 +44,17 @@ export class PaginationControlsDirective {
         if (this.id === undefined) {
             this.id = this.service.defaultId();
         }
+        let inst = this.service.getInstance(this.id);
+        let totalItems = inst.totalItems;
+        let itemsPerPage = inst.itemsPerPage;
+        let perPage:number[] = []
+
+        for(let i=0;i<totalItems/itemsPerPage;i++){
+            perPage.push(itemsPerPage)
+            itemsPerPage += itemsPerPage
+            // itemsPerPage += Math.floor(itemsPerPage/2)
+        }
+        this.perPage = perPage
         this.updatePageLinks();
     }
 
@@ -52,6 +64,10 @@ export class PaginationControlsDirective {
 
     ngOnDestroy() {
         this.changeSub.unsubscribe();
+    }
+    perPageChangeEmit(ev){
+        this.checkValidId();
+        this.perPageChange.emit(ev.target.value)
     }
 
     /**
