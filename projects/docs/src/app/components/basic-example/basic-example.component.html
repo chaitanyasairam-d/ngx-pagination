@@ -1,8 +1,8 @@
 <ul class="meal-list">
-    <li *ngFor="let meal of meals | paginate: { itemsPerPage: 10, currentPage: page }">
+    <li *ngFor="let meal of meals | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
         {{ meal }}
     </li>
 </ul>
 <div class="has-text-centered">
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <pagination-controls (pageChange)="page = $event" (perPageChange)="itemsPerPage=$event"></pagination-controls>
 </div>

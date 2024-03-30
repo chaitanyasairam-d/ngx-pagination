@@ -1,7 +1,9 @@
 
 <pagination-template #p="paginationApi"
                      [id]="config.id"
-                     (pageChange)="config.currentPage = $event">
+                     (pageChange)="config.currentPage = $event"
+                     (perPageChange)="config.itemsPerPage = $event"
+                     >
 
 
     <div class="custom-pagination">

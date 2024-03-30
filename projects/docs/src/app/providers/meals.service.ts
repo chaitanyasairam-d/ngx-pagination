@@ -41,7 +41,7 @@ export class MealsService {
             'on a stick with cheese',
             'in pitta bread'
         ];
-        for (var i = 1; i <= 100; i++) {
+        for (var i = 1; i <= 200; i++) {
             var dish = dishes[Math.floor(Math.random() * dishes.length)];
             var side = sides[Math.floor(Math.random() * sides.length)];
             meals.push('meal ' + i + ': ' + dish + ' ' + side);

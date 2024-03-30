@@ -19,6 +19,7 @@ export class ServerExampleComponent {
     p: number = 1;
     total: number;
     loading: boolean;
+    itemsPerPage:number=5
 
     ngOnInit() {
         this.getPage(1);
@@ -41,7 +42,8 @@ export class ServerExampleComponent {
  * Simulate an async HTTP call with a delayed observable.
  */
 function serverCall(meals: string[], page: number): Observable<IServerResponse> {
-    const perPage = 10;
+    const a = new ServerExampleComponent();
+    const perPage = a.itemsPerPage;
     const start = (page - 1) * perPage;
     const end = start + perPage;
 

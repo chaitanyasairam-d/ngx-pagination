@@ -9,4 +9,5 @@ import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
 export class BasicExampleComponent {
     @Input('data') meals: string[] = [];
     page: number = 1;
+    itemsPerPage:number = 10
 }

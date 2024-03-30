@@ -35,6 +35,10 @@ export class AdvancedExampleComponent {
         this.logEvent(`pageChange(${number})`);
         this.config.currentPage = number;
     }
+    onPerPageChange(number: number) {
+        this.logEvent(`perpageChange(${number})`);
+        this.config.itemsPerPage = number;
+    }
 
     onPageBoundsCorrection(number: number) {
         this.logEvent(`pageBoundsCorrection(${number})`);
